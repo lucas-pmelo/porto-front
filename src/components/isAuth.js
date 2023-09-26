@@ -3,24 +3,28 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 
 const isAuth = () => {
-    const [auth, setAuth] = useState(false);
+//     const [auth, setAuth] = useState(false);
 
-    useEffect(() => {
-        axios
-            .get("https://api-porto-v3is6fj6ha-rj.a.run.app/auth/", {
-                withCredentials: true
-            })
-            .then((response) => {
-                console.log(response.data);
-                if (response.status !== 200) {
-                    setAuth(false);
-                } else {
-                    setAuth(true);
-                }
+//     useEffect(() => {
+//         axios
+//             .get("https://api-porto-v3is6fj6ha-rj.a.run.app/auth/", {
+//                 withCredentials: true
+//             })
+//             .then((response) => {
+//                 console.log(response.data);
+//                 if (response.status !== 200) {
+//                     setAuth(false);
+//                     console.log("Não autenticado");
+//                 } else {
+//                     setAuth(true);
+//                     console.log("Autenticado");
+//                 }
+// // 
+//                 return auth;
+//             });
+//     }, []);
 
-                return auth;
-            });
-    }, []);
+//     return auth;
 };
 
 export default isAuth;

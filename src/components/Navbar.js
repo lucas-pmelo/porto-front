@@ -2,10 +2,43 @@ import React, { useState, useEffect } from "react";
 import { Button } from "./Button";
 import { Link } from "react-router-dom";
 import "./Navbar.css";
+import Entrar from "./pages/Entrar";
 
 function Navbar() {
+    
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
+    const [auth, setAuth] = useState(false);
+    const [username, setUsername] = useState("");
+
+
+    const response = async () => {
+        const response = await fetch("https://api-porto-v3is6fj6ha-rj.a.run.app/auth/", {
+            method: "GET",
+            credentials: "include"
+        });
+    
+        if (response.status !== 200) {
+            console.log("HEADER Não autenticado");
+            setAuth(false);
+            return;
+        }
+
+        const user = await response.json();
+    
+        console.log("HEADER Autenticado");
+        setAuth(true);
+        console.log("HEADER", user.name);
+        setUsername(user.name);
+        console.log("HEADER", username);
+    };
+    
+
+    useEffect(() => {
+        response();
+        console.log("HEADER", response());
+    }, []);
+
 
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
@@ -80,7 +113,7 @@ function Navbar() {
                     </ul>
                     {button && (
                         <Button buttonStyle="btn--outline">
-                            Olá, <strong>Lucas!</strong>
+                        {auth ? "Olá, " + <strong>{username}!</strong> : "Entrar"}
                         </Button>
                     )}
                 </div>

@@ -1,10 +1,12 @@
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import "./Entrar.css";
 import FormInput from "../FormInput";
-import axios from "axios";
+import Home from "./Home";
 
 const Entrar = () => {
+    const history = useHistory();
+
     const [values, setValues] = useState({
         email: "",
         senha: ""
@@ -46,7 +48,22 @@ const Entrar = () => {
                 password: values.senha
             })
         });
+        if(auth()){
+            // console.log("Autenticado");
+            return history.push("/");
+        }
     };
+
+    const auth = async () => {
+        await fetch("https://api-porto-v3is6fj6ha-rj.a.run.app/auth/", {
+            method: "GET",
+            credentials: "include"
+        }).then((response) => {
+            // console.log(response.data);
+        });
+
+        return auth;
+    }
 
     const handleSubmit = (e) => {
         e.preventDefault();

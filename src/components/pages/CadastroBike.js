@@ -3,33 +3,33 @@ import { useHistory } from "react-router-dom";
 import "./CadastroBike.css";
 import FormInput from "../FormInput";
 import axios from "axios";
+import Entrar from "./Entrar";
+import Footer from "../Footer";
 
 const CadastroBike = () => {
     const history = useHistory();
 
     const [auth, setAuth] = useState(false);
 
-    useEffect(() => {
-        axios
-            .get("https://api-porto-v3is6fj6ha-rj.a.run.app/auth/", {
-                withCredentials: true
-            })
-            .then((response) => {
-                console.log(response.data);
-                if (response.status !== 200) {
-                    setAuth(false);
-                } else {
-                    setAuth(true);
-                }
+    const response = async () => {
+        const response = await fetch("https://api-porto-v3is6fj6ha-rj.a.run.app/auth/", {
+            method: "GET",
+            credentials: "include"
+        });
 
-                return auth;
-            });
-
-        if (!auth) {
-            history.push("/entrar");
-        } else {
-            history.push("/cadastro-bike");
+        if (response.status !== 200) {
+            // console.log("Não autenticado");
+            setAuth(false);
+            return;
         }
+
+        // console.log("Autenticado");
+        setAuth(true);
+        history.push("/cadastro-bike");
+    };
+
+    useEffect(() => {
+        response();
     }, []);
 
     const [values, setValues] = useState({
@@ -107,22 +107,28 @@ const CadastroBike = () => {
         setValues({ ...values, [e.target.name]: e.target.value });
     };
 
+    const cadastroBike = <div className="cadastro-bike">
+    <form onSubmit={handleSubmit}>
+        <h1>Cadastrar Bike</h1>
+        {inputs.map((input) => (
+            <FormInput
+                key={input.id}
+                {...input}
+                value={values[input.name]}
+                onChange={onChange}
+            />
+        ))}
+        <button>Continuar</button>
+    </form>
+    </div>
+
+
     return (
-        <div className="cadastro-bike">
-            <form onSubmit={handleSubmit}>
-                <h1>Cadastrar Bike</h1>
-                {inputs.map((input) => (
-                    <FormInput
-                        key={input.id}
-                        {...input}
-                        value={values[input.name]}
-                        onChange={onChange}
-                    />
-                ))}
-                <button>Continuar</button>
-            </form>
-        </div>
+        <>
+            {auth ? cadastroBike : <Entrar />}
+            <Footer />
+        </>
     );
-};
+}
 
 export default CadastroBike;

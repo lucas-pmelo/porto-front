@@ -1,15 +1,39 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import "./Vistoria.css";
 import Footer from "../Footer";
-import isAuth from "../isAuth";
+import { useHistory } from "react-router-dom";
+import Entrar from "./Entrar";
 
 const Vistoria = () => {
+    const history = useHistory();
+
+    const [auth, setAuth] = useState(false);
+
+    const response = async () => {
+        const response = await fetch("https://api-porto-v3is6fj6ha-rj.a.run.app/auth/", {
+            method: "GET",
+            credentials: "include"
+        });
+
+        if (response.status !== 200) {
+            // console.log("Não autenticado");
+            setAuth(false);
+            return;
+        }
+
+        // console.log("Autenticado");
+        setAuth(true);
+        history.push("/vistoria");
+    };
+
     useEffect(() => {
-        isAuth();
+        response();
     }, []);
 
+
     return (
-        <div className="container">
+        <>
+            {auth ?  <div className="container">
             <div className="content">
                 <h1>Vistoria</h1>
                 <h2>
@@ -22,17 +46,10 @@ const Vistoria = () => {
                     Por favor, aguarde por breves atualizações.
                 </p>
             </div>
-        </div>
-    );
-};
-
-const App = () => {
-    return (
-        <>
-            <Vistoria />
+        </div>: <Entrar />}
             <Footer />
         </>
     );
 };
 
-export default App;
+export default Vistoria;

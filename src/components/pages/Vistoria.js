@@ -1,8 +1,13 @@
-import React from "react";
+import React, { useEffect } from "react";
 import "./Vistoria.css";
 import Footer from "../Footer";
+import isAuth from "../isAuth";
 
 const Vistoria = () => {
+    useEffect(() => {
+        isAuth();
+    }, []);
+
     return (
         <div className="container">
             <div className="content">

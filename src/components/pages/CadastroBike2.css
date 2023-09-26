@@ -22,7 +22,7 @@ p {
 }
 
 .button-upload {
-    background-color: #E8E8E8;
+    background-color: #e8e8e8;
     color: #636363;
     border: none;
     border-radius: 20px;
@@ -109,7 +109,7 @@ p {
 }
 
 .button-upload-4 {
-    background-color: #E8E8E8;
+    background-color: #e8e8e8;
     color: #636363;
     border: none;
     border-radius: 20px;
@@ -136,9 +136,9 @@ p {
     }
 
     p {
-        font-size: 16px; 
-        text-align: left; 
-        padding: 0 20px; 
+        font-size: 16px;
+        text-align: left;
+        padding: 0 20px;
     }
 
     .bike-row-container {

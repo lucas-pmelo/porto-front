@@ -58,6 +58,16 @@ function Navbar() {
                             </Link>
                         </li>
 
+                        <li className="nav-item">
+                            <Link
+                                to="/dados"
+                                className="nav-links"
+                                onClick={closeMobileMenu}
+                            >
+                                Dados
+                            </Link>
+                        </li>
+
                         <li className="nav-bttn">
                             <Link
                                 to="/entrar"

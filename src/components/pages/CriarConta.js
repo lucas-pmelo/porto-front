@@ -2,8 +2,11 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import "./CriarConta.css";
 import FormInput from "../FormInput";
+import { useHistory } from "react-router-dom";
 
 const CriarConta = () => {
+    const history = useHistory();
+
     const [values, setValues] = useState({
         nome: "",
         email: "",
@@ -123,6 +126,44 @@ const CriarConta = () => {
         }
     ];
 
+    const cadastrar = async () => {
+        await fetch("https://api-porto-v3is6fj6ha-rj.a.run.app/client/", {
+            method: "POST",
+            credentials: "include",
+            headers: {
+                Accept: "application/json, text/plain, */*",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                name: values.nome,
+                email: values.email,
+                password: values.senha,
+                phone: values.telefone,
+                cpf: values.cpf,
+                address: values.endereço,
+                city: values.cidade,
+                state: values.estado,
+                cep: values.cep,
+                birth: values.nascimento
+            })
+        });
+        if (auth()) {
+            // console.log("Autenticado");
+            return history.push("/");
+        }
+    };
+
+    const auth = async () => {
+        await fetch("https://api-porto-v3is6fj6ha-rj.a.run.app/auth/", {
+            method: "GET",
+            credentials: "include"
+        }).then((response) => {
+            // console.log(response.data);
+        });
+
+        return auth;
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
     };
@@ -144,7 +185,7 @@ const CriarConta = () => {
                     />
                 ))}
                 <button>
-                    <Link to="/perfil" className="enviar">
+                    <Link to="/perfil" className="enviar" onClick={cadastrar}>
                         Cadastrar
                     </Link>
                 </button>

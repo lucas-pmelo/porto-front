@@ -5,32 +5,43 @@ import Footer from "../Footer";
 import isAuth from "../isAuth";
 import axios from "axios";
 import { useHistory } from "react-router-dom";
+import Entrar from "./Entrar";
 
 function Perfil() {
     const history = useHistory();
     const [auth, setAuth] = useState(false);
-    useEffect(() => {
-        axios
-            .get("https://api-porto-v3is6fj6ha-rj.a.run.app/auth/", {
-                withCredentials: true
-            })
-            .then((response) => {
-                console.log(response.data);
-                if (response.status !== 200) {
-                    setAuth(false);
-                } else {
-                    setAuth(true);
-                }
+    const [username, setUsername] = useState("");
 
-                return auth;
-            });
+    const response = async () => {
+        const response = await fetch(
+            "https://api-porto-v3is6fj6ha-rj.a.run.app/auth/",
+            {
+                method: "GET",
+                credentials: "include"
+            }
+        );
 
-        if (!auth) {
-            history.push("/entrar");
+        if (response.status !== 200) {
+            console.log("HEADER Não autenticado");
+            setAuth(false);
+            return;
         }
+
+        const user = await response.json();
+
+        // console.log("HEADER Autenticado");
+        setAuth(true);
+        setUsername(user.name);
+        history.push("/perfil");
+        // console.log("HEADER USERNAME:", username);
+    };
+
+    useEffect(() => {
+        response();
+        // console.log("HEADER", response());
     }, []);
 
-    return (
+    const perfilPage = (
         <div>
             <div className="capa">
                 <div className="foto-perfil"></div>
@@ -38,7 +49,7 @@ function Perfil() {
             <div className="nome-usuario">
                 Bem-vindo,
                 <br />
-                <strong>Lucas!</strong>
+                <strong>{username}!</strong>
             </div>
             <div className="texto-opcao">O que você deseja fazer?</div>
             <div className="botoes">
@@ -48,12 +59,18 @@ function Perfil() {
                 <Link to="/vistoria" className="botao">
                     Verificar Vistoria
                 </Link>
-                <Link to="/" className="botao">
+                <Link to="/dados" className="botao">
                     Sair
                 </Link>
             </div>
-            <Footer />
         </div>
+    );
+
+    return (
+        <>
+            {auth ? perfilPage : <Entrar />}
+            <Footer />
+        </>
     );
 }
 

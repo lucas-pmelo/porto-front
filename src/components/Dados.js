@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import Home from "./pages/Home";
 
 const Dados = () => {
     const [data, setData] = useState([]);
@@ -43,7 +44,11 @@ const Dados = () => {
         // auth();
     }, []);
 
-    return <div></div>;
+    return (
+        <div>
+            <Home />
+        </div>
+    );
 };
 
 export default Dados;

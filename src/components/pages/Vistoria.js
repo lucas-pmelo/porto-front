@@ -8,18 +8,24 @@ const Vistoria = () => {
     const history = useHistory();
 
     const [auth, setAuth] = useState(false);
+    const [username, setUsername] = useState("");
 
     const response = async () => {
-        const response = await fetch("https://api-porto-v3is6fj6ha-rj.a.run.app/auth/", {
-            method: "GET",
-            credentials: "include"
-        });
+        const response = await fetch(
+            "https://api-porto-v3is6fj6ha-rj.a.run.app/auth/",
+            {
+                method: "GET",
+                credentials: "include"
+            }
+        );
 
         if (response.status !== 200) {
             // console.log("Não autenticado");
             setAuth(false);
             return;
         }
+        const user = await response.json();
+        setUsername(user.name);
 
         // console.log("Autenticado");
         setAuth(true);
@@ -30,23 +36,67 @@ const Vistoria = () => {
         response();
     }, []);
 
-
     return (
         <>
-            {auth ?  <div className="container">
-            <div className="content">
-                <h1>Vistoria</h1>
-                <h2>
-                    Olá, <strong>Lucas!</strong>
-                </h2>
-                <p>
-                    Ainda não concluímos o resultado de sua vistoria. <br />
-                    Caso recusado, restarão mais 2 tentativas e após o limite
-                    excedido <br /> será necessário entrar em contato a Porto.
-                    Por favor, aguarde por breves atualizações.
-                </p>
-            </div>
-        </div>: <Entrar />}
+            {auth ? (
+                <div className="container">
+                    <div className="content">
+                        <h1>Vistoria</h1>
+                        <h2>
+                            Olá, <strong>{username}!</strong>
+                        </h2>
+                        <p>
+                            Caso alguma vistoria seja recusada, restarão mais 2
+                            tentativas! <br /> Se o limite for excedido, será
+                            recomendado que entre em contato com um atendente
+                            Porto.
+                        </p>
+                        <div className="card">
+                            <img
+                                src="/images/bikeusada.jpeg"
+                                alt="Bike do usuário"
+                                className="bike"
+                            />
+                            <h3>Bike Caloi</h3>
+                            <p>
+                                Status:{" "}
+                                <strong className="ativo">Seguro Ativo</strong>
+                            </p>
+                        </div>
+                        <div className="card">
+                            <img
+                                src="/images/bicicletaacabada.jpg"
+                                alt="Bike do usuário"
+                                className="bike"
+                            />
+                            <h3>Bike Destruída</h3>
+                            <p>
+                                Status:{" "}
+                                <strong className="recusado">
+                                    Recusado <br /> 3/3 tentativas
+                                </strong>
+                            </p>
+                        </div>
+                        <div className="card">
+                            <img
+                                src="/images/bikedopai.jpeg"
+                                alt="Bike do usuário"
+                                className="bike"
+                            />
+                            <h3>Bike Do Pai</h3>
+                            <p>
+                                Status:{" "}
+                                <strong className="andamento">
+                                    Em Andamento...
+                                    <br /> 1/3 tentativas
+                                </strong>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            ) : (
+                <Entrar />
+            )}
             <Footer />
         </>
     );

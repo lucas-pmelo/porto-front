@@ -5,19 +5,20 @@ import "./Navbar.css";
 import Entrar from "./pages/Entrar";
 
 function Navbar() {
-    
     const [click, setClick] = useState(false);
     const [button, setButton] = useState(true);
     const [auth, setAuth] = useState(false);
     const [username, setUsername] = useState("");
 
-
     const response = async () => {
-        const response = await fetch("https://api-porto-v3is6fj6ha-rj.a.run.app/auth/", {
-            method: "GET",
-            credentials: "include"
-        });
-    
+        const response = await fetch(
+            "https://api-porto-v3is6fj6ha-rj.a.run.app/auth/",
+            {
+                method: "GET",
+                credentials: "include"
+            }
+        );
+
         if (response.status !== 200) {
             console.log("HEADER Não autenticado");
             setAuth(false);
@@ -25,20 +26,14 @@ function Navbar() {
         }
 
         const user = await response.json();
-    
-        console.log("HEADER Autenticado");
+
         setAuth(true);
-        console.log("HEADER", user.name);
         setUsername(user.name);
-        console.log("HEADER", username);
     };
-    
 
     useEffect(() => {
         response();
-        console.log("HEADER", response());
     }, []);
-
 
     const handleClick = () => setClick(!click);
     const closeMobileMenu = () => setClick(false);
@@ -91,15 +86,15 @@ function Navbar() {
                             </Link>
                         </li>
 
-                        <li className="nav-item">
+                        {/* <li className="nav-item">
                             <Link
-                                to="/dados"
+                                to="/criar-conta"
                                 className="nav-links"
                                 onClick={closeMobileMenu}
                             >
-                                Dados
+                                Criar Conta
                             </Link>
-                        </li>
+                        </li> */}
 
                         <li className="nav-bttn">
                             <Link
@@ -113,7 +108,7 @@ function Navbar() {
                     </ul>
                     {button && (
                         <Button buttonStyle="btn--outline">
-                        {auth ? "Olá, " + <strong>{username}!</strong> : "Entrar"}
+                            {auth ? "Olá, " + username : "Entrar / Criar Conta"}
                         </Button>
                     )}
                 </div>

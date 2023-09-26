@@ -16,7 +16,6 @@
     margin-right: auto;
 }
 
-
 .content h1 {
     text-align: center;
 }
@@ -31,9 +30,8 @@
     margin-top: 20px;
 }
 
-
 .button-upload {
-    background-color: #E8E8E8;
+    background-color: #e8e8e8;
     color: #636363;
     border: none;
     border-radius: 20px;
@@ -75,4 +73,47 @@
     width: 200px;
     margin-top: 10px;
     margin-bottom: 10px;
+}
+
+.card {
+    display: flex;
+    width: auto;
+    height: 100%;
+    background-color: #e8e8e8;
+    border-radius: 10px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.card h3 {
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: auto;
+    margin-left: -10rem;
+}
+
+.card p {
+    margin-top: auto;
+    margin-bottom: auto;
+    left: 0;
+}
+
+.bike {
+    border-radius: 1rem;
+    width: 100px;
+    height: 100px;
+    margin-left: 1rem;
+}
+
+.ativo {
+    color: green;
+}
+
+.recusado {
+    color: red;
+}
+
+.andamento {
+    color: orange;
 }

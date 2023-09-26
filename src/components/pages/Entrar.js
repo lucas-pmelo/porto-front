@@ -30,7 +30,7 @@ const Entrar = () => {
             errorMessage:
                 "Sua senha deve conter entre 8-20 caracteres e incluir pelo menos 1 letra, 1 número e 1 caractere especial!",
             label: "Senha",
-            // pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
+            pattern: `^(?=.*[0-9])(?=.*[a-zA-Z])(?=.*[!@#$%^&*])[a-zA-Z0-9!@#$%^&*]{8,20}$`,
             required: true
         }
     ];
@@ -48,7 +48,7 @@ const Entrar = () => {
                 password: values.senha
             })
         });
-        if(auth()){
+        if (auth()) {
             // console.log("Autenticado");
             return history.push("/");
         }
@@ -63,7 +63,7 @@ const Entrar = () => {
         });
 
         return auth;
-    }
+    };
 
     const handleSubmit = (e) => {
         e.preventDefault();

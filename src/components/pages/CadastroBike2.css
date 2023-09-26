@@ -1,0 +1,183 @@
+.container {
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+    margin-top: 10px;
+    color: #353535;
+    text-align: center;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+p {
+    text-align: left;
+}
+
+.button-upload {
+    background-color: #E8E8E8;
+    color: #636363;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+    max-width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.button-enviar {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #08a4ff;
+    color: #ffffff;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    max-width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+}
+
+.enviar {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
+}
+
+.bike-container {
+    text-align: center;
+}
+
+.qr-code-container {
+    text-align: center;
+}
+
+.bike {
+    max-width: 100%;
+    height: auto;
+    width: 180px;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.bike-3 {
+    max-width: 100%;
+    height: auto;
+    width: 120px;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.bike-4 {
+    max-width: 150%;
+    height: auto;
+    width: 220px;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 0px;
+}
+
+.qr-code {
+    max-width: 100%;
+    height: auto;
+    width: 50px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.bike-row-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.button-upload-4 {
+    background-color: #E8E8E8;
+    color: #636363;
+    border: none;
+    border-radius: 20px;
+    padding: 10px 20px;
+    cursor: pointer;
+    font-size: 16px;
+    max-width: 200px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 0px;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .title {
+        font-size: 24px;
+        text-align: center;
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    p {
+        font-size: 16px; 
+        text-align: left; 
+        padding: 0 20px; 
+    }
+
+    .bike-row-container {
+        display: block;
+    }
+
+    .bike-img {
+        margin-bottom: 20px;
+        text-align: center;
+    }
+
+    .button-upload {
+        max-width: 100%;
+    }
+
+    .button-upload-4 {
+        margin-top: 20px;
+    }
+
+    .qr-code {
+        max-width: 80%;
+        margin: 0 auto;
+    }
+
+    .bike-3 {
+        max-width: 70%;
+        height: auto;
+        width: 230px;
+        margin: 0 auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+
+    .bike-4 {
+        max-width: 100%;
+        height: auto;
+        width: 230px;
+        margin: 0 auto;
+        margin-top: 10px;
+        margin-bottom: 10px;
+    }
+}

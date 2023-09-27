@@ -139,18 +139,14 @@ const CriarConta = () => {
                 email: values.email,
                 password: values.senha,
                 phone: values.telefone,
-                cpf: values.cpf,
+                document: values.cpf,
                 address: values.endereço,
                 city: values.cidade,
                 state: values.estado,
-                cep: values.cep,
-                birth: values.nascimento
+                zip_code: values.cep,
+                birthday: values.nascimento
             })
         });
-        if (auth()) {
-            // console.log("Autenticado");
-            return history.push("/");
-        }
     };
 
     const auth = async () => {

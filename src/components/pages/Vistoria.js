@@ -9,6 +9,7 @@ const Vistoria = () => {
 
     const [auth, setAuth] = useState(false);
     const [username, setUsername] = useState("");
+    const [bikes, setBikes] = useState([]);
 
     const response = async () => {
         const response = await fetch(
@@ -32,8 +33,32 @@ const Vistoria = () => {
         history.push("/vistoria");
     };
 
+    const pegarBikes = async () => {
+        const response = await fetch(
+            "https://api-porto-v3is6fj6ha-rj.a.run.app/bike/",
+            {
+                method: "GET",
+                credentials: "include"
+            }
+        );
+
+        if (response.status !== 200) {
+            console.log("Erro");
+            return;
+        }
+
+        const bikes = await response.json();
+        console.log(bikes);
+
+        setBikes(bikes);
+    };
+
     useEffect(() => {
         response();
+    }, []);
+
+    useEffect(() => {
+        pegarBikes();
     }, []);
 
     return (
@@ -53,7 +78,7 @@ const Vistoria = () => {
                         </p>
                         <div className="card">
                             <img
-                                src="/images/bikeusada.jpeg"
+                                src="/images/bikedopai.jpeg"
                                 alt="Bike do usuário"
                                 className="bike"
                             />
@@ -77,21 +102,22 @@ const Vistoria = () => {
                                 </strong>
                             </p>
                         </div>
-                        <div className="card">
-                            <img
-                                src="/images/bikedopai.jpeg"
-                                alt="Bike do usuário"
-                                className="bike"
-                            />
-                            <h3>Bike Do Pai</h3>
-                            <p>
-                                Status:{" "}
-                                <strong className="andamento">
-                                    Em Andamento...
-                                    <br /> 1/3 tentativas
-                                </strong>
-                            </p>
-                        </div>
+                        {bikes.map((bike) => (
+                            <div className="card">
+                                <img
+                                    src="/images/bike-teste4.png"
+                                    alt="Bike do usuário"
+                                    className="bike"
+                                />
+                                <h3>{bike.model}</h3>
+                                <p>
+                                    Status:{" "}
+                                    <strong className="ativo">
+                                        Seguro Ativo
+                                    </strong>
+                                </p>
+                            </div>
+                        ))}
                     </div>
                 </div>
             ) : (

@@ -1,12 +1,22 @@
-import React, { useEffect } from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useHistory } from "react-router-dom";
 import "./CadastroBike2.css";
 import isAuth from "../isAuth";
+import Vistoria from "./Vistoria";
+import ImageUploading from "react-images-uploading";
 
-const CadastroBike2 = () => {
+const CadastroBike2 = ({ to }) => {
+    const history = useHistory();
+
     useEffect(() => {
         isAuth();
     }, []);
+
+    const loading = (
+        <div className="alert">
+            <p>Carregando...</p>
+        </div>
+    );
 
     return (
         <div className="container">
@@ -45,9 +55,11 @@ const CadastroBike2 = () => {
                                     className="bike"
                                 />
                                 <div className="center-button">
-                                    <button className="button-upload">
-                                        Foto 1
-                                    </button>
+                                    <input
+                                        type="file"
+                                        id="file-input"
+                                        name="ImageStyle"
+                                    />
                                 </div>
                             </div>
                             <div className="bike-img">
@@ -57,9 +69,11 @@ const CadastroBike2 = () => {
                                     className="bike"
                                 />
                                 <div className="center-button">
-                                    <button className="button-upload">
-                                        Foto 2
-                                    </button>
+                                    <input
+                                        type="file"
+                                        id="file-input"
+                                        name="ImageStyle"
+                                    />
                                 </div>
                             </div>
                         </div>
@@ -71,9 +85,11 @@ const CadastroBike2 = () => {
                                     className="bike-3"
                                 />
                                 <div className="center-button">
-                                    <button className="button-upload">
-                                        Foto 3
-                                    </button>
+                                    <input
+                                        type="file"
+                                        id="file-input"
+                                        name="ImageStyle"
+                                    />
                                 </div>
                             </div>
                             <div className="bike-img">
@@ -83,9 +99,11 @@ const CadastroBike2 = () => {
                                     className="bike-4"
                                 />
                                 <div className="center-button">
-                                    <button className="button-upload-4">
-                                        Foto 4
-                                    </button>
+                                    <input
+                                        type="file"
+                                        id="file-input"
+                                        name="ImageStyle"
+                                    />
                                 </div>
                             </div>
                         </div>

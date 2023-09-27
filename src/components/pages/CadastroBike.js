@@ -12,10 +12,13 @@ const CadastroBike = () => {
     const [auth, setAuth] = useState(false);
 
     const response = async () => {
-        const response = await fetch("https://api-porto-v3is6fj6ha-rj.a.run.app/auth/", {
-            method: "GET",
-            credentials: "include"
-        });
+        const response = await fetch(
+            "https://api-porto-v3is6fj6ha-rj.a.run.app/auth/",
+            {
+                method: "GET",
+                credentials: "include"
+            }
+        );
 
         if (response.status !== 200) {
             // console.log("Não autenticado");
@@ -31,6 +34,33 @@ const CadastroBike = () => {
     useEffect(() => {
         response();
     }, []);
+
+    const envioBike = async () => {
+        const response = await fetch(
+            "https://api-porto-v3is6fj6ha-rj.a.run.app/bike/",
+            {
+                method: "POST",
+                credentials: "include",
+                headers: {
+                    Accept: "application/json, text/plain, */*",
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    brand: values.marca,
+                    model: values.modelo,
+                    price: parseFloat(values.valor),
+                    year: parseInt(values.ano),
+                    color: values.cor,
+                    serial_number: values.numeroDeSerie
+                })
+            }
+        );
+
+        if (response.status !== 200) {
+            console.log("Erro");
+            return;
+        }
+    };
 
     const [values, setValues] = useState({
         numeroDeSerie: "",
@@ -107,21 +137,22 @@ const CadastroBike = () => {
         setValues({ ...values, [e.target.name]: e.target.value });
     };
 
-    const cadastroBike = <div className="cadastro-bike">
-    <form onSubmit={handleSubmit}>
-        <h1>Cadastrar Bike</h1>
-        {inputs.map((input) => (
-            <FormInput
-                key={input.id}
-                {...input}
-                value={values[input.name]}
-                onChange={onChange}
-            />
-        ))}
-        <button>Continuar</button>
-    </form>
-    </div>
-
+    const cadastroBike = (
+        <div className="cadastro-bike">
+            <form onSubmit={handleSubmit}>
+                <h1>Cadastrar Bike</h1>
+                {inputs.map((input) => (
+                    <FormInput
+                        key={input.id}
+                        {...input}
+                        value={values[input.name]}
+                        onChange={onChange}
+                    />
+                ))}
+                <button onClick={envioBike}>Continuar</button>
+            </form>
+        </div>
+    );
 
     return (
         <>
@@ -129,6 +160,6 @@ const CadastroBike = () => {
             <Footer />
         </>
     );
-}
+};
 
 export default CadastroBike;

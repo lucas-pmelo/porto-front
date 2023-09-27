@@ -60,6 +60,9 @@ const Entrar = () => {
             credentials: "include"
         }).then((response) => {
             // console.log(response.data);
+            if (response.status === 404 || response.status === 401) {
+                alert("Usuário ou senha inválido!");
+            }
         });
 
         return auth;

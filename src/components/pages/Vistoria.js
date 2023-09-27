@@ -85,7 +85,7 @@ const Vistoria = () => {
                             <h3>Bike Caloi</h3>
                             <p>
                                 Status:{" "}
-                                <strong className="ativo">Seguro Ativo</strong>
+                                <strong className="ativo">Vistoria Aprovada</strong>
                             </p>
                         </div>
                         <div className="card">
@@ -113,7 +113,7 @@ const Vistoria = () => {
                                 <p>
                                     Status:{" "}
                                     <strong className="ativo">
-                                        Seguro Ativo
+                                        Vistoria Aprovada
                                     </strong>
                                 </p>
                             </div>

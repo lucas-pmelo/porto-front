@@ -11,6 +11,7 @@ import CriarConta from "./components/pages/CriarConta";
 import Perfil from "./components/pages/Perfil";
 import Dados from "./components/Dados";
 import isAuth from "./components/isAuth";
+import Loading from "./components/Loading";
 
 function App() {
     return (
